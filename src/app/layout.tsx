@@ -6,9 +6,9 @@ import { ThirdwebProvider } from "thirdweb/react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "thirdweb SDK + Next starter",
+  title: "CodeDay",
   description:
-    "Starter template for using thirdweb SDK with Next.js App router",
+    "The whole coding marketplace",
 };
 
 export default function RootLayout({
@@ -19,8 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThirdwebProvider>{children}</ThirdwebProvider>
+        <ThirdwebProvider >{children}</ThirdwebProvider>
       </body>
     </html>
   );
 }
+
