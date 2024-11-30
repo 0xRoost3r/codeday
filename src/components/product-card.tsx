@@ -7,7 +7,7 @@ import {
   CardHeader,
 } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import type { Product } from "../types"
+import type { Product } from "./types"
 
 interface ProductCardProps {
   product: Product
