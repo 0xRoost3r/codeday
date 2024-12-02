@@ -11,28 +11,10 @@ import {
 } from "@/components/ui/select"
 import { FilterSidebar } from "@/components/filter-sidebar"
 import { ProductCard } from "@/components/product-card"
-
-const sampleProduct = {
-  id: "1",
-  title: "TableTrack - The Complete SaaS Restaurant Management System",
-  author: {
-    name: "ajay138",
-    category: "PHP Scripts"
-  },
-  price: 29,
-  rating: 4.5,
-  reviews: 10,
-  sales: 123,
-  lastUpdated: "28 Nov 24",
-  software: {
-    version: "PHP 8.x",
-    framework: "Laravel"
-  },
-  fileTypes: ["JavaScript JS", "JavaScript JSON", "HTML", "CSS", "Sass", "PHP"],
-  thumbnail: "https://kzmk5g7qxu247irkg9x4.lite.vusercontent.net/placeholder.svg?height=400&width=600"
-}
+import { sampleProducts } from './constant';
 
 export default function Marketplace() {
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="sticky top-0 z-10 bg-purple-600 p-4 text-center text-white">
@@ -76,12 +58,9 @@ export default function Marketplace() {
         <div className="grid gap-6 md:grid-cols-[240px_1fr]">
           <FilterSidebar />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <ProductCard product={sampleProduct} />
-            <ProductCard product={sampleProduct} />
-            <ProductCard product={sampleProduct} />
-            <ProductCard product={sampleProduct} />
-            <ProductCard product={sampleProduct} />
-            <ProductCard product={sampleProduct} />
+            {sampleProducts.map((item,idx) => {
+              return <ProductCard key={idx} product={item} />
+            })}
           </div>
         </div>
       </main>

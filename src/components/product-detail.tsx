@@ -1,0 +1,141 @@
+'use client'
+
+import { useState } from 'react'
+import { Star, Check, Info } from 'lucide-react'
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Product } from "@/components/types";
+
+interface ProductDetailProps {
+  product: Product;
+}
+
+export default function ProductDetail({ product }: ProductDetailProps) {
+  const [extendSupport, setExtendSupport] = useState(false)
+  const extendedSupportPrice = 27.75
+
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <div className='mb-4'>
+        <h1 className="text-3xl font-bold mb-4">{product.title}</h1>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center">
+            {[1, 2, 3].map((i) => (
+              <Star key={i} className="w-5 h-5 fill-primary" />
+            ))}
+            <Star key="4" className="w-5 h-5 fill-primary opacity-30" />
+            <Star key="5" className="w-5 h-5 fill-primary opacity-30" />
+            <span className="ml-2 text-sm text-muted-foreground">3.29</span>
+          </div>
+          <Badge variant="secondary">{product.sales} sales</Badge>
+          <Badge variant="outline" className="bg-green-50">Recently Updated</Badge>
+        </div>
+      </div>
+      <div className="grid lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2">
+          <div className="space-y-6">
+            <Card className="overflow-hidden">
+              <img 
+                src={product.thumbnail} 
+                alt="ViserTube Platform Preview"
+                className="w-full object-cover"
+              />
+            </Card>
+
+            <div className="space-y-4">
+              <h2 className="text-2xl font-semibold">Key Features</h2>
+              <ul className="space-y-3">
+                {[
+                  "Video Content Management",
+                  "Video Subscription System",
+                  "Video Advertising System",
+                  "Monetization & Payout System",
+                  "Subtitle and Resolution Control via FFMPEG",
+                  "Short-Form Video Reels System",
+                  "30+ Automated Payment Gateways"
+                ].map((feature) => (
+                  <li key={feature} className="flex items-center gap-2">
+                    <Check className="w-5 h-5 text-green-500" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="lg:col-span-1">
+          <Card className="p-6">
+            <div className="mb-6">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-xl font-semibold">Regular License</h3>
+                <div className="text-3xl font-bold">${product.price}</div>
+              </div>
+              
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-center gap-2">
+                  <Check className="w-5 h-5 text-green-500" />
+                  <span>Quality checked by Envato</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-5 h-5 text-green-500" />
+                  <span>Future updates</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-5 h-5 text-green-500" />
+                  <span className="flex items-center gap-2">
+                    6 months support from ViserLab
+                    <Info className="w-4 h-4 text-muted-foreground" />
+                  </span>
+                </li>
+              </ul>
+
+              <div className="flex items-start gap-2 mb-6">
+                <Checkbox 
+                  id="extended-support"
+                  checked={extendSupport}
+                  onCheckedChange={(checked) => setExtendSupport(checked as boolean)}
+                />
+                <div>
+                  <label 
+                    htmlFor="extended-support" 
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    Extend support to 12 months
+                  </label>
+                  <p className="text-sm text-muted-foreground">
+                    ${extendedSupportPrice}
+                  </p>
+                </div>
+              </div>
+
+              <Button className="w-full" size="lg">
+                Add to Cart
+              </Button>
+
+              <p className="text-sm text-muted-foreground text-center mt-4">
+                Price is in US dollars and excludes tax and handling fees
+              </p>
+            </div>
+
+            <div className="pt-6 border-t">
+              <div className="flex items-center gap-3 mb-4">
+                <Badge variant="outline" className="bg-green-50">Power Elite Author</Badge>
+              </div>
+              <div className="flex items-center gap-3">
+                <div>
+                  <h4 className="font-semibold">ViserLab</h4>
+                  <p className="text-sm text-muted-foreground">Elite Author</p>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </div>
+    </div>
+  )
+}
+

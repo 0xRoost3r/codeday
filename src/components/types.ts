@@ -16,4 +16,4 @@ export interface Product {
     }
     fileTypes: string[]
     thumbnail: string
-}  
+  }
