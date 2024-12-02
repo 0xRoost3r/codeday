@@ -30,7 +30,7 @@ export function ProductCard({ product }: ProductCardProps) {
       </CardHeader>
       <CardContent className="grid gap-2.5 p-4">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="line-clamp-2 font-semibold">{product.title}</h3>
+          <a href={"product/" + product.id}><h3 className="line-clamp-2 font-semibold">{product.title}</h3> </a>
           <Button size="icon" variant="ghost">
             <Heart className="h-4 w-4" />
           </Button>

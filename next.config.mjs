@@ -5,6 +5,7 @@ const nextConfig = {
     config.externals.push("pino-pretty", "lokijs", "encoding");
     return config;
   },
+  serverExternalPackages:  ['grammy'],
 };
 
 export default nextConfig;

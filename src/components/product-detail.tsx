@@ -2,11 +2,14 @@
 
 import { useState } from 'react'
 import { Star, Check, Info } from 'lucide-react'
-import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Product } from "@/components/types";
+import { TransactionButton } from 'thirdweb/react'
+import { prepareTransaction, toWei } from 'thirdweb'
+import { baseSepolia, } from 'thirdweb/chains'
+import { client } from '@/app/client'
 
 interface ProductDetailProps {
   product: Product;
@@ -15,7 +18,6 @@ interface ProductDetailProps {
 export default function ProductDetail({ product }: ProductDetailProps) {
   const [extendSupport, setExtendSupport] = useState(false)
   const extendedSupportPrice = 27.75
-
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -111,11 +113,20 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   </p>
                 </div>
               </div>
-
-              <Button className="w-full" size="lg">
-                Add to Cart
-              </Button>
-
+              <TransactionButton
+                transaction={() => {
+                    // Create a transaction object and return it
+                    const transaction = prepareTransaction({
+                        to: "0x1Acae1b16655bEB267f8FbD95198B1BF9A6970ad",
+                        chain: baseSepolia,
+                        client: client,
+                        value: toWei("0.0001"),
+                    });
+                    return transaction;
+                }}
+               >
+                Shut off & Take my money!
+              </TransactionButton>
               <p className="text-sm text-muted-foreground text-center mt-4">
                 Price is in US dollars and excludes tax and handling fees
               </p>

@@ -16,18 +16,7 @@ import { sampleProducts } from './constant';
 export default function Marketplace() {
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="sticky top-0 z-10 bg-purple-600 p-4 text-center text-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between">
-          <span className="text-lg font-medium">
-            Cyber Sale! Up to 50% off best-selling WordPress plugins, PHP scripts & more
-          </span>
-          <Button variant="secondary" className="bg-green-400 text-black hover:bg-green-500">
-            Save up to 50%
-          </Button>
-        </div>
-      </div>
-      
+    <div className="min-h-screen bg-gray-50">      
       <main className="mx-auto max-w-7xl p-6">
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center gap-4">

@@ -8,7 +8,6 @@ export default async function Page({
   }) {
     const slug = (await params).id
     const product = sampleProducts.find(item => item.id === slug);
-    console.log(product)
     if (product !== undefined) {
         return (
             <ProductDetail product={product} />
