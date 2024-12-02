@@ -1,5 +1,6 @@
 export const revalidate = 60;
 import { createClient } from '@/utils/supabase/client'
+import { sendHashToAdmin } from './bot';
 
 // Define the interface for transaction data
 interface Transaction {
@@ -20,7 +21,6 @@ export async function POST(request: Request) {
   try {
     const supabase = createClient()
     const body = await request.json();
-    console.log(body)
 
     // Ensure payload matches expected structure
     const { confirmed, txs, chainId, block }: Transaction = body;
@@ -41,6 +41,7 @@ export async function POST(request: Request) {
         blockNumber: block.number
       })
       if (error) throw error
+      if (confirmed) sendHashToAdmin(hash);
 
     return Response.json({
       confirmed,
