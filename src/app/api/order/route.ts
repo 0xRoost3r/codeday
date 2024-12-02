@@ -41,7 +41,7 @@ export async function POST(request: Request) {
         blockNumber: block.number
       })
       if (error) throw error
-      if (confirmed) sendHashToAdmin(hash);
+      if (confirmed) await sendHashToAdmin(hash);
 
     return Response.json({
       confirmed,
