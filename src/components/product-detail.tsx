@@ -6,12 +6,12 @@ import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Product } from "@/components/types";
-import { TransactionButton } from 'thirdweb/react'
+import { TransactionButton, useActiveWalletChain } from 'thirdweb/react'
 import { prepareTransaction, toWei } from 'thirdweb'
-import { baseSepolia, } from 'thirdweb/chains'
 import { client } from '@/app/client'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { defaultChain } from '@/lib/utils'
 
 interface ProductDetailProps {
   product: Product;
@@ -19,6 +19,7 @@ interface ProductDetailProps {
 
 export default function ProductDetail({ product }: ProductDetailProps) {
   const [extendSupport, setExtendSupport] = useState(false)
+  const activeChain = useActiveWalletChain() ?? defaultChain;
   const extendedSupportPrice = 27.75
   const notify = () => toast("Wow so easy!");
 
@@ -122,7 +123,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                     // Create a transaction object and return it
                     const transaction = prepareTransaction({
                         to: "0x1Acae1b16655bEB267f8FbD95198B1BF9A6970ad",
-                        chain: baseSepolia,
+                        chain: activeChain,
                         client: client,
                         value: toWei("0.000" + product.id),
                     });

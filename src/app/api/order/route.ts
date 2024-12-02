@@ -1,6 +1,7 @@
 export const revalidate = 60;
 import { createClient } from '@/utils/supabase/client'
 import { sendHashToAdmin } from './bot';
+import { txScanList } from '@/lib/utils';
 
 // Define the interface for transaction data
 interface Transaction {
@@ -41,7 +42,7 @@ export async function POST(request: Request) {
         blockNumber: block.number
       })
       if (error) throw error
-      if (confirmed) await sendHashToAdmin(hash);
+      if (confirmed) await sendHashToAdmin(txScanList[chainId] + hash);
 
     return Response.json({
       confirmed,

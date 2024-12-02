@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ConnectButton, ThirdwebProvider } from "thirdweb/react";
 import { client } from "./client";
-import { baseSepolia } from "thirdweb/chains";
+import { bscTestnet } from "thirdweb/chains";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +27,7 @@ export default function RootLayout({
               <span className="xl:text-lg md:text-md text-xs font-medium">
                 Black Friday! Up to 50% off best-selling EVM dApp and Telegram Mini App
               </span>
-              <ConnectButton theme="light" client={client} chain={baseSepolia} />
+              <ConnectButton theme="light" client={client} chain={bscTestnet} />
             </div>
           </div>
           {children}
