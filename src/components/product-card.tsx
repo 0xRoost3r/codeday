@@ -1,4 +1,4 @@
-import { Heart, MoreHorizontal, ShoppingCart } from 'lucide-react'
+import { Heart, ShoppingCart } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -8,12 +8,14 @@ import {
 } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import type { Product } from "./types"
+import { useRouter } from 'next/navigation'
 
 interface ProductCardProps {
   product: Product
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+  const router = useRouter();
   return (
     <Card className="group relative">
       <CardHeader className="p-0">
@@ -61,7 +63,7 @@ export function ProductCard({ product }: ProductCardProps) {
       <CardFooter className="flex items-center justify-between p-4">
         <div className="text-lg font-bold">${product.price}</div>
         <div className="flex gap-2">
-          <Button size="sm">
+          <Button onClick={() => router.push('/product/' + product.id)} size="sm">
             <ShoppingCart className="mr-2 h-4 w-4" />
             Buy Now
           </Button>
