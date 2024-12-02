@@ -10,6 +10,8 @@ import { TransactionButton } from 'thirdweb/react'
 import { prepareTransaction, toWei } from 'thirdweb'
 import { baseSepolia, } from 'thirdweb/chains'
 import { client } from '@/app/client'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface ProductDetailProps {
   product: Product;
@@ -18,6 +20,7 @@ interface ProductDetailProps {
 export default function ProductDetail({ product }: ProductDetailProps) {
   const [extendSupport, setExtendSupport] = useState(false)
   const extendedSupportPrice = 27.75
+  const notify = () => toast("Wow so easy!");
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -120,10 +123,11 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                         to: "0x1Acae1b16655bEB267f8FbD95198B1BF9A6970ad",
                         chain: baseSepolia,
                         client: client,
-                        value: toWei("0.0001"),
+                        value: toWei("0.000" + product.id),
                     });
                     return transaction;
                 }}
+                onTransactionSent={(tx) => notify()}
                >
                 Shut off & Take my money!
               </TransactionButton>
@@ -146,6 +150,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           </Card>
         </div>
       </div>
+      <ToastContainer />
     </div>
   )
 }
