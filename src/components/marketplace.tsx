@@ -1,14 +1,5 @@
 "use client";
 
-import { GridIcon, ListIcon } from 'lucide-react'
-import { Button } from "@/components/ui/button"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import { FilterSidebar } from "@/components/filter-sidebar"
 import { ProductCard } from "@/components/product-card"
 import { sampleProducts } from './constant';
@@ -19,7 +10,7 @@ export default function Marketplace() {
     <div className="min-h-screen bg-gray-50">      
       <main className="mx-auto max-w-7xl p-6">
         <div className="mb-6 flex items-center justify-between">
-          <div className="flex items-center gap-4">
+          {/* <div className="flex items-center gap-4">
             <Button variant="outline" size="icon">
               <GridIcon className="h-4 w-4" />
             </Button>
@@ -38,10 +29,10 @@ export default function Marketplace() {
                 <SelectItem value="price">Price</SelectItem>
               </SelectContent>
             </Select>
-          </div>
-          <span className="text-sm text-muted-foreground">
+          </div> */}
+          {/* <span className="text-sm text-muted-foreground">
             Price is in US dollars and excludes tax and handling fees
-          </span>
+          </span> */}
         </div>
 
         <div className="grid gap-6 md:grid-cols-[240px_1fr]">

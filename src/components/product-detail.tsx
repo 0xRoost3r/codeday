@@ -117,6 +117,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 </div>
               </div>
               <TransactionButton
+                theme="light"
                 transaction={() => {
                     // Create a transaction object and return it
                     const transaction = prepareTransaction({

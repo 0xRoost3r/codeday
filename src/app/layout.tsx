@@ -22,12 +22,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ThirdwebProvider >
-          <div className="sticky top-0 z-10 bg-purple-600 p-4 text-center text-white">
+          <div className="sticky top-0 z-10 bg-red-600 p-4 text-center text-white">
             <div className="mx-auto flex max-w-7xl items-center justify-between">
-              <span className="text-lg font-medium">
+              <span className="xl:text-lg md:text-md text-xs font-medium">
                 Black Friday! Up to 50% off best-selling EVM dApp and Telegram Mini App
               </span>
-              <ConnectButton client={client} chain={baseSepolia} />
+              <ConnectButton theme="light" client={client} chain={baseSepolia} />
             </div>
           </div>
           {children}

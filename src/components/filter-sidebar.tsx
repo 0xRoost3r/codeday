@@ -5,6 +5,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
+import { useState } from 'react'
 
 const categories = [
   { name: "HTML5", count: 230 },
@@ -19,6 +20,8 @@ const categories = [
 ]
 
 export function FilterSidebar() {
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="w-64 space-y-4">
       <div className="flex items-center justify-between">
@@ -27,7 +30,7 @@ export function FilterSidebar() {
           Clear all
         </Button>
       </div>
-      <Collapsible defaultOpen>
+      <Collapsible defaultOpen open={open} onOpenChange={setOpen}>
         <CollapsibleTrigger className="flex w-full items-center justify-between py-2 text-sm font-medium">
           Category
           <ChevronDown className="h-4 w-4" />
