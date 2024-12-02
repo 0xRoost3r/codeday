@@ -4,6 +4,9 @@ import { createClient } from '@/utils/supabase/client'
 // Define the interface for transaction data
 interface Transaction {
     confirmed: boolean;
+    block: {
+      number: Number;
+    }
     chainId: string;
     txs: Array<{
         hash: string;
@@ -17,12 +20,13 @@ export async function POST(request: Request) {
   try {
     const supabase = createClient()
     const body = await request.json();
+    console.log(body)
 
     // Ensure payload matches expected structure
-    const { confirmed, txs, chainId }: Transaction = body;
+    const { confirmed, txs, chainId, block }: Transaction = body;
 
     if (!txs || txs.length === 0) {
-      return Response.json({ error: "No transactions found" }, { status: 400 });
+      return Response.json({ error: "No transactions found" }, { status: 200 });
     }
 
     // Extract data from the first transaction
@@ -34,6 +38,7 @@ export async function POST(request: Request) {
         value: value,
         chainId: chainId,
         confirmed: confirmed,
+        blockNumber: block.number
       })
       if (error) throw error
 
