@@ -29,8 +29,9 @@ export default function Marketplace() {
 
           <div className="grid lg:grid-cols-[280px_1fr] gap-6 relative ">
             <div
-              className={`lg:block ${sidebarOpen ? 'block' : 'hidden'} fixed top-0 left-0 ${sidebarOpen ? 'bg-white w-[280px] h-full' : 'hidden'}
-              lg:z-auto z-40 p-6 lg:p-0 lg:static lg:relative transition-transform duration-3000 lg:transform-none`}
+              className={`lg:block ${sidebarOpen ? 'block' : 'hidden'} 
+    fixed top-0 left-0 ${sidebarOpen ? 'bg-white w-[280px] h-full' : 'hidden'}
+    lg:z-auto z-40 p-6 lg:p-0 lg:static lg:relative transition-transform duration-3000 lg:transform-none`}
             >
               <div className="lg:hidden flex justify-between mb-4">
                 <Button

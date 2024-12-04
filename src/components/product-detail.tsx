@@ -24,7 +24,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const notify = () => toast("Wow so easy!");
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-[1024px]"> {/* Set max-width to 1024px */}
+    <div className="container mx-auto px-4 py-8 max-w-[1024px]">
       <div className='mb-4'>
         <h1 className="text-3xl font-bold mb-4">{product.title}</h1>
         <div className="flex items-center gap-4">
@@ -41,7 +41,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         </div>
       </div>
 
-      {/* Responsive grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
           <div className="space-y-6">
@@ -155,7 +154,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           </Card>
         </div>
       </div>
-
       <ToastContainer />
     </div>
   )
