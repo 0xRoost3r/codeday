@@ -24,7 +24,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const notify = () => toast("Wow so easy!");
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 max-w-[1024px]">
       <div className='mb-4'>
         <h1 className="text-3xl font-bold mb-4">{product.title}</h1>
         <div className="flex items-center gap-4">
@@ -40,12 +40,13 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           <Badge variant="outline" className="bg-green-50">Recently Updated</Badge>
         </div>
       </div>
-      <div className="grid lg:grid-cols-3 gap-8">
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
           <div className="space-y-6">
             <Card className="overflow-hidden">
-              <img 
-                src={product.thumbnail} 
+              <img
+                src={product.thumbnail}
                 alt="ViserTube Platform Preview"
                 className="w-full object-cover"
               />
@@ -80,7 +81,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 <h3 className="text-xl font-semibold">Regular License</h3>
                 <div className="text-3xl font-bold">${product.price}</div>
               </div>
-              
+
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center gap-2">
                   <Check className="w-5 h-5 text-green-500" />
@@ -100,14 +101,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               </ul>
 
               <div className="flex items-start gap-2 mb-6">
-                <Checkbox 
+                <Checkbox
                   id="extended-support"
                   checked={extendSupport}
                   onCheckedChange={(checked) => setExtendSupport(checked as boolean)}
                 />
                 <div>
-                  <label 
-                    htmlFor="extended-support" 
+                  <label
+                    htmlFor="extended-support"
                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                   >
                     Extend support to 12 months
@@ -117,22 +118,23 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   </p>
                 </div>
               </div>
+
               <TransactionButton
                 theme="light"
                 transaction={() => {
-                    // Create a transaction object and return it
-                    const transaction = prepareTransaction({
-                        to: "0x1Acae1b16655bEB267f8FbD95198B1BF9A6970ad",
-                        chain: activeChain,
-                        client: client,
-                        value: toWei("0.000" + product.id),
-                    });
-                    return transaction;
+                  const transaction = prepareTransaction({
+                    to: "0x1Acae1b16655bEB267f8FbD95198B1BF9A6970ad",
+                    chain: activeChain,
+                    client: client,
+                    value: toWei("0.000" + product.id),
+                  });
+                  return transaction;
                 }}
                 onTransactionSent={(tx) => notify()}
-               >
+              >
                 Shut off & Take my money!
               </TransactionButton>
+
               <p className="text-sm text-muted-foreground text-center mt-4">
                 Price is in US dollars and excludes tax and handling fees
               </p>
@@ -152,8 +154,8 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           </Card>
         </div>
       </div>
+
       <ToastContainer />
     </div>
   )
 }
-
