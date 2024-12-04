@@ -12,6 +12,6 @@ interface TxScanList {
   [key: string]: string; // Flexible keys with string values
 }
 export const txScanList : TxScanList = {
-  "0x61" : "https://testnet.bscscan.com/tx/",
-  "0x14a34" : "https://sepolia.basescan.org/tx/",
+  "97" : "https://testnet.bscscan.com/tx/",
+  "84532" : "https://sepolia.basescan.org/tx/",
 }

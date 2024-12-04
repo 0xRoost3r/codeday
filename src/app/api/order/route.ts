@@ -4,7 +4,7 @@ import { sendHashToAdmin } from './bot';
 import { txScanList } from '@/lib/utils';
 
 // Define the interface for transaction data
-interface Transaction {
+interface WebHookTransaction {
     confirmed: boolean;
     block: {
       number: Number;
@@ -15,7 +15,14 @@ interface Transaction {
         fromAddress: string;
         toAddress: string;
         value: string;
+        input: string;
     }>;
+    txsInternal: Array<{
+      transactionHash: string;
+      from: string;
+      to: string;
+      value: string;
+  }>
 }
 
 export async function POST(request: Request) {
@@ -24,30 +31,34 @@ export async function POST(request: Request) {
     const body = await request.json();
 
     // Ensure payload matches expected structure
-    const { confirmed, txs, chainId, block }: Transaction = body;
+    const { confirmed, txsInternal, txs, chainId, block }: WebHookTransaction = body;
 
-    if (!txs || txs.length === 0) {
+    if (!txsInternal || txsInternal.length === 0) {
       return Response.json({ error: "No transactions found" }, { status: 200 });
     }
 
     // Extract data from the first transaction
-    const { fromAddress, toAddress, value, hash } = txs[0];
+    const { to, value, transactionHash } = txsInternal[0];
+    const { fromAddress, input } = txs[0];
+    const orderId = parseInt(input.substring(10));
+    console.log(`orderId`, orderId)
 
     const { error } = await supabase.from('order').upsert({
-        hash: hash,
+        hash: transactionHash,
         fromAddress: fromAddress,
         value: value,
-        chainId: chainId,
+        orderId: orderId,
+        chainId: parseInt(chainId),
         confirmed: confirmed,
         blockNumber: block.number
       })
       if (error) throw error
-      if (confirmed) await sendHashToAdmin(txScanList[chainId] + hash);
+      if (confirmed) await sendHashToAdmin(txScanList[parseInt(chainId)] + transactionHash);
 
     return Response.json({
       confirmed,
       fromAddress,
-      toAddress,
+      to,
       value,
     });
   } catch (error) {
