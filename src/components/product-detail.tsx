@@ -8,11 +8,11 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Product } from "@/components/types";
 import { TransactionButton, useActiveWalletChain } from 'thirdweb/react'
 import { getContract, prepareContractCall, toWei } from 'thirdweb'
+import { defaultChain, txScanList } from '@/lib/utils'
+import { PaymentForwarderAddressContract } from '@/lib/orderContract'
 import { client } from '@/app/client'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { defaultChain, txScanList } from '@/lib/utils'
-import { PaymentForwarderAddressContract } from '@/lib/orderContract'
 
 interface ProductDetailProps {
   product: Product;
@@ -26,7 +26,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const contract = getContract({client, chain: activeChain, address: loadActiveContract});
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 max-w-[1024px]">
       <div className='mb-4'>
         <h1 className="text-3xl font-bold mb-4">{product.title}</h1>
         <div className="flex items-center gap-4">
@@ -42,12 +42,13 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           <Badge variant="outline" className="bg-green-50">Recently Updated</Badge>
         </div>
       </div>
-      <div className="grid lg:grid-cols-3 gap-8">
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
           <div className="space-y-6">
             <Card className="overflow-hidden">
-              <img 
-                src={product.thumbnail} 
+              <img
+                src={product.thumbnail}
                 alt="ViserTube Platform Preview"
                 className="w-full object-cover"
               />
@@ -82,7 +83,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 <h3 className="text-xl font-semibold">Regular License</h3>
                 <div className="text-3xl font-bold">${product.price}</div>
               </div>
-              
+
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center gap-2">
                   <Check className="w-5 h-5 text-green-500" />
@@ -102,14 +103,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               </ul>
 
               <div className="flex items-start gap-2 mb-6">
-                <Checkbox 
+                <Checkbox
                   id="extended-support"
                   checked={extendSupport}
                   onCheckedChange={(checked) => setExtendSupport(checked as boolean)}
                 />
                 <div>
-                  <label 
-                    htmlFor="extended-support" 
+                  <label
+                    htmlFor="extended-support"
                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                   >
                     Extend support to 12 months
@@ -119,21 +120,22 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   </p>
                 </div>
               </div>
+
               <TransactionButton
                 theme="light"
-                transaction={() => {
-                    const transaction = prepareContractCall({
-                      contract,
-                      method: "function forwardPayment(uint256 orderId)",
-                      params: [BigInt(product.id)],
-                      value: toWei("0.00" + product.price.toString()),
-                    });
-                    return transaction;
-                }}
                 onTransactionSent={(tx) => notify(tx)}
-               >
+                transaction={() => {
+                  const transaction = prepareContractCall({
+                    contract,
+                    method: "function forwardPayment(uint256 orderId)",
+                    params: [BigInt(product.id)],
+                    value: toWei("0.00" + product.price.toString()),
+                  });
+                  return transaction;
+                }}>
                 Shut off & Take my money!
               </TransactionButton>
+
               <p className="text-sm text-muted-foreground text-center mt-4">
                 Price is in US dollars and excludes tax and handling fees
               </p>
@@ -157,4 +159,3 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     </div>
   )
 }
-
