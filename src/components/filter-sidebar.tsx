@@ -23,13 +23,18 @@ export function FilterSidebar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="w-64 space-y-4">
+    <div className="w-[280px] space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold">Filter & Refine</h2>
-        <Button variant="ghost" size="sm">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="lg:py-2 lg:px-1 p-0 pr-12 lg:pr-0"
+        >
           Clear all
         </Button>
       </div>
+
       <Collapsible defaultOpen open={open} onOpenChange={setOpen}>
         <CollapsibleTrigger className="flex w-full items-center justify-between py-2 text-sm font-medium">
           Category
@@ -57,4 +62,3 @@ export function FilterSidebar() {
     </div>
   )
 }
-
