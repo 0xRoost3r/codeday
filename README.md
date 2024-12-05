@@ -1,61 +1,24 @@
 
-![tw-banner](https://github.com/thirdweb-example/next-starter/assets/57885104/20c8ce3b-4e55-4f10-ae03-2fe4743a5ee8)
+#Các Bước Fork Repository
 
-# thirdweb-next-starter
-
-Mẫu khởi tạo để xây dựng ứng dụng React Native on-chain với [thirdweb](https://thirdweb.com/) và [next](https://nextjs.org/).
-
-## Cài Đặt
-
-Cài đặt mẫu sử dụng [thirdweb create](https://portal.thirdweb.com/cli/create):
-
-```bash
-npx thirdweb create app --next
-```
-
-##Các Bước Fork Repository và Thiết Lập Môi Trường
-
-###Fork Repository
-
-1. Truy cập repository gốc: [thirdweb-next-starter](https://github.com/thirdweb-example/next-starter).
+##Fork Respository
+1. Truy cập repository gốc: [codeday](https://github.com/0xRoost3r/codeday).
 2. Nhấn vào nút **Fork** ở góc phải trên cùng trang để sao chép repository vào tài khoản GitHub của bạn.
 
-###Tạo Repository Mới Trên GitHub (Nếu cần)
-
-1. Truy cập [GitHub](https://github.com/) và đăng nhập vào tài khoản của bạn.
-2. Nhấn vào nút **+** ở góc trên bên phải và chọn **New repository**.
-3. Đặt tên cho repository, ví dụ: `my-thirdweb-next-app`.
-4. Chọn chế độ **Public** hoặc **Private** cho repository của bạn.
-5. Nhấn **Create repository**.
-
-###Clone Repository Về Máy Tính
-
+##Clone Repository
 
 1. Truy cập repository fork trong tài khoản GitHub của bạn.
 2. Nhấn vào nút **Code** và sao chép URL (HTTPS hoặc SSH).
 3. Mở terminal và chạy lệnh sau để clone repository về máy tính:
 
    ```bash
-   git clone https://github.com/your-username/repository-name.git
+   git clone git clone https://github.com/your-username/codeday.git
    ```
+**Lưu ý**: Thay `your-username` bằng tên người dùng GitHub của bạn.
 
-###Kết Nối Repository Mới Với Dự Án Của Bạn
+#Cài Đặt CLIENT_ID Và Chạy Dự Án Trên Local
 
-1. Mở terminal và điều hướng đến thư mục chứa dự án của bạn.
-2. Chạy lệnh sau để liên kết repository local với repository trên GitHub:
-
-   ```bash
-   git remote add origin https://github.com/your-username/my-thirdweb-next-app.git
-   ```
-
-3. Push mã nguồn lên repository mới:
-
-   ```bash
-   git push -u origin main
-   ```
-
-###Thiết Lập Môi Trường
-
+## Lấy CLIENT_ID Từ Thirdweb
 1. Trong thư mục gốc của project, tạo một file `.env`.
 2. Thêm biến môi trường sau vào file `.env`:
 
@@ -65,7 +28,7 @@ npx thirdweb create app --next
 
 3. **CLIENT_ID**: Đây là mã ID khách hàng cần thiết để kết nối với thirdweb. Để biết cách tạo `CLIENT_ID`, tham khảo tài liệu [client documentation](https://portal.thirdweb.com/typescript/v5/client).
 
-###Cài Đặt Dự Án
+##Chạy Dự Án Trên Local
 
 Cài đặt các phụ thuộc
 
@@ -91,26 +54,27 @@ Xem trước build sản xuất
 yarn start
 ```
 
-###Đẩy Dự Án Lên GitHub
+#Đẩy Dự Án Lên GitHub
 
-Để đẩy các thay đổi của bạn lên GitHub, bạn chỉ cần sử dụng các lệnh sau trong terminal:
+Sau khi thực hiện các thay đổi, sử dụng lệnh sau để thêm thay đổi vào Git:
 
 ```bash
 git add .
 git commit -m "Initial commit"
-git push origin main
 ```
 
-## Tài Nguyên
+Sau đó, bạn sẽ push các thay đổi lên repository của bạn (repo đã fork):
 
-- [Tài liệu hướng dẫn](https://portal.thirdweb.com/typescript/v5)
-- [Các mẫu dự án](https://thirdweb.com/templates)
-- [YouTube](https://www.youtube.com/c/thirdweb)
-- [Blog](https://blog.thirdweb.com)
+```bash
+git push origin main
+```
+##Tạo Pull Request Vào Repository Gốc
 
-## Cần Giúp Đỡ?
-
-Nếu bạn gặp bất kỳ vấn đề nào hoặc có câu hỏi, vui lòng [truy cập trang hỗ trợ](https://thirdweb.com/support).
+1. Sau khi push code lên repository của bạn, vào trang repository của bạn trên GitHub.
+2. Nhấn vào tab **Pull requests** và chọn **New pull request**.
+3. Chọn repository của bạn làm "base" và repository gốc làm "head".
+4. Điền tiêu đề và mô tả cho pull request và
+nhấn **Create pull request**.
 
 ---
 
