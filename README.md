@@ -12,7 +12,7 @@
 3. Mở terminal và chạy lệnh sau để clone repository về máy tính:
 
    ```bash
-   git clone git clone https://github.com/your-username/codeday.git
+   git clone https://github.com/your-username/codeday.git
    ```
 **Lưu ý**: Thay `your-username` bằng tên người dùng GitHub của bạn.
 
