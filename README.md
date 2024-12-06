@@ -75,8 +75,3 @@ git push origin main
 3. Chọn repository của bạn làm "base" và repository gốc làm "head".
 4. Điền tiêu đề và mô tả cho pull request và
 nhấn **Create pull request**.
-
----
-
-
-

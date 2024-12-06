@@ -7,11 +7,12 @@ import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Product } from "@/components/types";
 import { TransactionButton, useActiveWalletChain } from 'thirdweb/react'
-import { prepareTransaction, toWei } from 'thirdweb'
+import { getContract, prepareContractCall, toWei } from 'thirdweb'
+import { defaultChain, txScanList } from '@/lib/utils'
+import { PaymentForwarderAddressContract } from '@/lib/orderContract'
 import { client } from '@/app/client'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { defaultChain } from '@/lib/utils'
 
 interface ProductDetailProps {
   product: Product;
@@ -20,8 +21,9 @@ interface ProductDetailProps {
 export default function ProductDetail({ product }: ProductDetailProps) {
   const [extendSupport, setExtendSupport] = useState(false)
   const activeChain = useActiveWalletChain() ?? defaultChain;
-  const extendedSupportPrice = 27.75
-  const notify = () => toast("Wow so easy!");
+  const loadActiveContract = PaymentForwarderAddressContract[activeChain.id];
+  const notify = (message: any) => toast(<a target='_blank' href={txScanList[activeChain.id] + message.transactionHash}>{txScanList[activeChain.id] + message.transactionHash}</a>);
+  const contract = getContract({client, chain: activeChain, address: loadActiveContract});
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-[1024px]">
@@ -114,24 +116,23 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                     Extend support to 12 months
                   </label>
                   <p className="text-sm text-muted-foreground">
-                    ${extendedSupportPrice}
+                    ${product.price}
                   </p>
                 </div>
               </div>
 
               <TransactionButton
                 theme="light"
+                onTransactionSent={(tx) => notify(tx)}
                 transaction={() => {
-                  const transaction = prepareTransaction({
-                    to: "0x1Acae1b16655bEB267f8FbD95198B1BF9A6970ad",
-                    chain: activeChain,
-                    client: client,
-                    value: toWei("0.000" + product.id),
+                  const transaction = prepareContractCall({
+                    contract,
+                    method: "function forwardPayment(uint256 orderId)",
+                    params: [BigInt(product.id)],
+                    value: toWei("0.00" + product.price.toString()),
                   });
                   return transaction;
-                }}
-                onTransactionSent={(tx) => notify()}
-              >
+                }}>
                 Shut off & Take my money!
               </TransactionButton>
 
