@@ -1,11 +1,11 @@
 
-#Các Bước Fork Repository
+# Các Bước Fork Repository
 
-##Fork Respository
+## Fork Respository
 1. Truy cập repository gốc: [codeday](https://github.com/0xRoost3r/codeday).
 2. Nhấn vào nút **Fork** ở góc phải trên cùng trang để sao chép repository vào tài khoản GitHub của bạn.
 
-##Clone Repository
+## Clone Repository
 
 1. Truy cập repository fork trong tài khoản GitHub của bạn.
 2. Nhấn vào nút **Code** và sao chép URL (HTTPS hoặc SSH).
@@ -16,7 +16,7 @@
    ```
 **Lưu ý**: Thay `your-username` bằng tên người dùng GitHub của bạn.
 
-#Cài Đặt CLIENT_ID Và Chạy Dự Án Trên Local
+# Cài Đặt CLIENT_ID Và Chạy Dự Án Trên Local
 
 ## Lấy CLIENT_ID Từ Thirdweb
 1. Trong thư mục gốc của project, tạo một file `.env`.
@@ -28,7 +28,7 @@
 
 3. **CLIENT_ID**: Đây là mã ID khách hàng cần thiết để kết nối với thirdweb. Để biết cách tạo `CLIENT_ID`, tham khảo tài liệu [client documentation](https://portal.thirdweb.com/typescript/v5/client).
 
-##Chạy Dự Án Trên Local
+## Chạy Dự Án Trên Local
 
 Cài đặt các phụ thuộc
 
@@ -54,7 +54,7 @@ Xem trước build sản xuất
 yarn start
 ```
 
-#Đẩy Dự Án Lên GitHub
+# Đẩy Dự Án Lên GitHub
 
 Sau khi thực hiện các thay đổi, sử dụng lệnh sau để thêm thay đổi vào Git:
 
@@ -68,7 +68,7 @@ Sau đó, bạn sẽ push các thay đổi lên repository của bạn (repo đ�
 ```bash
 git push origin main
 ```
-##Tạo Pull Request Vào Repository Gốc
+## Tạo Pull Request Vào Repository Gốc
 
 1. Sau khi push code lên repository của bạn, vào trang repository của bạn trên GitHub.
 2. Nhấn vào tab **Pull requests** và chọn **New pull request**.
