@@ -53,7 +53,6 @@ export const sampleProducts: Product[] = [
     fileTypes: ["PHP", "HTML", "CSS"],
     thumbnail: "https://kzmk5g7qxu247irkg9x4.lite.vusercontent.net/placeholder.svg?height=400&width=600",
   },
-  // Add 25 more items here with unique properties.
   {
     id: "29",
     title: "AdWizard - Ad Campaign Manager",

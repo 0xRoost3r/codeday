@@ -1,16 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FilterSidebar } from "@/components/filter-sidebar";
 import { ProductCard } from "@/components/product-card";
-import { sampleProducts } from './constant';
+import { useProductStore } from '../store/productStore';
 import { Button } from "@/components/ui/button";
-import { ChevronDown, X, ChevronUp, ArrowDownWideNarrow, ArrowUpNarrowWide } from "lucide-react";
+import { ChevronDown, X, ArrowDownWideNarrow, ArrowUpNarrowWide } from "lucide-react";
 
 export default function Marketplace() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
+
+  const { products, fetchProducts } = useProductStore(state => state);
 
   const handleCategoryChange = (categories: string[]) => {
     setSelectedCategories(categories);
@@ -20,19 +22,9 @@ export default function Marketplace() {
     setSortOrder(order);
   };
 
-  const filteredProducts = selectedCategories.length === 0
-    ? sampleProducts
-    : sampleProducts.filter(product =>
-      selectedCategories.includes(product.author.category)
-    );
-
-  const sortedProducts = sortOrder
-    ? [...filteredProducts].sort((a, b) =>
-      sortOrder === "asc"
-        ? a.price - b.price
-        : b.price - a.price
-    )
-    : filteredProducts;
+  useEffect(() => {
+    fetchProducts(selectedCategories, sortOrder);
+  }, [selectedCategories, sortOrder, fetchProducts]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -77,21 +69,29 @@ export default function Marketplace() {
 
             <div className="flex flex-col gap-4">
               <div className="flex w-full justify-start lg:justify-end space-x-4 mb-2">
-                <Button onClick={() => handleSortChange("asc")} variant="outline" size="sm" className="flex items-center gap-2">
+                <Button
+                  onClick={() => handleSortChange("asc")}
+                  variant="outline"
+                  size="sm"
+                  className="flex items-center gap-2"
+                >
                   <ArrowUpNarrowWide className="h-4 w-4" />
                   Giá tăng dần
                 </Button>
-                <Button onClick={() => handleSortChange("desc")} variant="outline" size="sm" className="flex items-center gap-2">
+                <Button
+                  onClick={() => handleSortChange("desc")}
+                  variant="outline"
+                  size="sm"
+                  className="flex items-center gap-2"
+                >
                   <ArrowDownWideNarrow className="h-4 w-4" />
                   Giá giảm dần
                 </Button>
               </div>
 
-
-
               <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-1">
-                {sortedProducts.map((item, idx) => (
-                  <ProductCard key={idx} product={item} />
+                {products.map((item) => (
+                  <ProductCard key={item.id} product={item} />
                 ))}
               </div>
             </div>

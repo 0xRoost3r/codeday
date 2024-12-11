@@ -27,9 +27,12 @@ export function FilterSidebar({ onCategoryChange }: FilterSidebarProps) {
       const newCategories = prevState.includes(categoryName)
         ? prevState.filter(name => name !== categoryName)
         : [...prevState, categoryName];
-
       return newCategories;
     });
+  };
+
+  const handleClearAll = () => {
+    setSelectedCategories([]);
   };
 
   useEffect(() => {
@@ -44,6 +47,7 @@ export function FilterSidebar({ onCategoryChange }: FilterSidebarProps) {
           variant="ghost"
           size="sm"
           className="lg:py-2 lg:px-1 p-0 pr-12 lg:pr-0"
+          onClick={handleClearAll}
         >
           Clear all
         </Button>
